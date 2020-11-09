@@ -69,14 +69,18 @@ for a_id in A_IDS:
 FIG, AXS = plt.subplots(2, 2)
 AXS[0, 0].set_title('time/mile')
 for values in META.values():
-    AXS[0, 0].plot(range(len(values['mile_time'])), values['mile_time'])
+    AXS[0, 0].plot(range(len(values['mile_time'])), values['mile_time'],label=values['date'])
+AXS[0,0].legend(loc='best')
 AXS[0, 1].set_title('Heartrate')
 for values in META.values():
-    AXS[0, 1].scatter(range(len(values['heartrate'])), values['heartrate'])
+    AXS[0, 1].scatter(range(len(values['heartrate'])), values['heartrate'],label=values['date'])
+AXS[0,1].legend(loc='best')
 AXS[1, 0].set_title('cadence')
 for values in META.values():
-    AXS[1, 0].plot(range(len(values['cadence'])), values['cadence'])
+    AXS[1, 0].plot(range(len(values['cadence'])), values['cadence'],label=values['date'])
+AXS[1,0].legend(loc='best')
 AXS[1, 1].set_title('altitude')
 for values in META.values():
-    AXS[1, 1].plot(range(len(values['altitude'])), values['altitude'])
+    AXS[1, 1].plot(range(len(values['altitude'])), values['altitude'],label=values['date'])
+AXS[1,1].legend(loc='best')
 FIG.show()
