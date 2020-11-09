@@ -16,9 +16,6 @@ CLIENT = StravaIO(access_token=TOKEN['access_token'])
 A_IDS = []
 META = {}
 
-##
-ATHLETE_ID = '31467737'
-
 def closest(lst, k):
     """ returns closest value to k in list """
     return lst[min(range(len(lst)), key=lambda i: abs(lst[i]-k))]
@@ -34,7 +31,7 @@ def start_time(activity):
 
 LIST_ACTIVITIES = CLIENT.get_logged_in_athlete_activities(after='last month')
 
-ATHELETE_ID = LIST_ACTIVITIES[0].athlete.id
+ATHLETE_ID = LIST_ACTIVITIES[0].athlete.id
 for item in LIST_ACTIVITIES:
     if item.type == 'Run':
         A_IDS.append(item.id)
@@ -46,7 +43,7 @@ for a_id in A_IDS:
     a_altitude = []
     a_cadence = []
     a_heartrate = []
-    a_stream = CLIENT.get_activity_streams(a_id, ATHELETE_ID)
+    a_stream = CLIENT.get_activity_streams(a_id, ATHLETE_ID)
     total_distance = a_stream.distance[-1]*0.00062137
     distance = a_stream.distance
     # a_distance = [i * 0.00062137 for i in distance]
@@ -69,18 +66,22 @@ for a_id in A_IDS:
 FIG, AXS = plt.subplots(2, 2)
 AXS[0, 0].set_title('time/mile')
 for values in META.values():
-    AXS[0, 0].plot(range(len(values['mile_time'])), values['mile_time'],label=values['date'])
-AXS[0,0].legend(loc='best')
+    AXS[0, 0].plot(range(len(values['mile_time'])),
+                   values['mile_time'], label=values['date'])
+AXS[0, 0].legend(loc='best')
 AXS[0, 1].set_title('Heartrate')
 for values in META.values():
-    AXS[0, 1].scatter(range(len(values['heartrate'])), values['heartrate'],label=values['date'])
-AXS[0,1].legend(loc='best')
+    AXS[0, 1].scatter(range(len(values['heartrate'])),
+                      values['heartrate'], label=values['date'])
+AXS[0, 1].legend(loc='best')
 AXS[1, 0].set_title('cadence')
 for values in META.values():
-    AXS[1, 0].plot(range(len(values['cadence'])), values['cadence'],label=values['date'])
-AXS[1,0].legend(loc='best')
+    AXS[1, 0].plot(range(len(values['cadence'])),
+                   values['cadence'], label=values['date'])
+AXS[1, 0].legend(loc='best')
 AXS[1, 1].set_title('altitude')
 for values in META.values():
-    AXS[1, 1].plot(range(len(values['altitude'])), values['altitude'],label=values['date'])
-AXS[1,1].legend(loc='best')
+    AXS[1, 1].plot(range(len(values['altitude'])),
+                   values['altitude'], label=values['date'])
+AXS[1, 1].legend(loc='best')
 FIG.show()
