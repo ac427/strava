@@ -16,6 +16,7 @@ CLIENT = StravaIO(access_token=TOKEN['access_token'])
 A_IDS = []
 META = {}
 
+
 def closest(lst, k):
     """ returns closest value to k in list """
     return lst[min(range(len(lst)), key=lambda i: abs(lst[i]-k))]
@@ -84,4 +85,4 @@ for values in META.values():
     AXS[1, 1].plot(range(len(values['altitude'])),
                    values['altitude'], label=values['date'])
 AXS[1, 1].legend(loc='best')
-FIG.show()
+plt.show()

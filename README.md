@@ -6,7 +6,7 @@ Fetches the data of last month runs ( `Run` is hardcoded. You can change it in c
 
 #set up
 ```
-pip3 install --user  -r pip3 install -r requirements.txt 
+pip3 install --user -r requirements.txt 
 
 ```
 
