@@ -1,6 +1,7 @@
 # strava
 
-Fetches the data of last month runs ( `Run` is hardcoded. You can change it in code if you want for different activity) and plots
+activities_stream_runs.py fetches the data of last month runs and plots
+activities_stream_ride.py fetches the data of last year runs and plots ( check `after='last month' if you want to modify )
 
 * Link to et secret https://www.strava.com/settings/api
 
