@@ -7,8 +7,9 @@ Fetches the data of last month runs ( `Run` is hardcoded. You can change it in c
 #set up
 ```
 pip3 install --user -r requirements.txt 
-
+export STRAVA_SECRET=xxxxxxxx
 ```
 
 Sample plot
-![Sample Plot](https://raw.githubusercontent.com/ac427/strava/main/example.png)
+![Sample Run Plot](https://raw.githubusercontent.com/ac427/strava/main/example.png)
+![Sample Ride Plot](https://raw.githubusercontent.com/ac427/strava/main/example_ride.png)
