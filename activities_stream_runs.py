@@ -45,23 +45,35 @@ for a_id in A_IDS:
     a_cadence = []
     a_heartrate = []
     a_stream = CLIENT.get_activity_streams(a_id, ATHLETE_ID)
-    total_distance = a_stream.distance[-1]*0.00062137
-    distance = a_stream.distance
-    # a_distance = [i * 0.00062137 for i in distance]
-    # lets plot the first 3 miles
-    for i in range(math.floor(total_distance)):
-        closest_mile_value = closest(distance, i*1609.34)
-        index = distance.index(closest_mile_value)
-        # convert to miles
-        a_altitude.append(a_stream.altitude[index])
-        a_cadence.append(a_stream.cadence[index])
-        a_heartrate.append(a_stream.heartrate[index])
-        a_time.append(a_stream.time[index]/60)
-    time_per_mile = ([y - x for x, y in zip(a_time, a_time[1:])])
-    time_per_mile.insert(0, 0)
-    a_date = start_time(a_id)
-    META[a_id] = {"date": a_date, "mile_time": time_per_mile, "time": a_time,
-                  "heartrate": a_heartrate, "cadence": a_cadence, "altitude": a_altitude}
+    # plot only if distance is more than a mile
+    if a_stream.distance is not None and a_stream.distance[-1] >= 0.00062137:
+        total_distance = a_stream.distance[-1]*0.00062137
+        distance = a_stream.distance
+        # a_distance = [i * 0.00062137 for i in distance]
+        # lets plot the first 3 miles
+        for i in range(math.floor(total_distance)):
+            closest_mile_value = closest(distance, i*1609.34)
+            index = distance.index(closest_mile_value)
+            # convert to miles
+            try:
+                a_altitude.append(a_stream.altitude[index])
+            except TypeError:
+                a_altitude.append(0)
+            try:
+                a_cadence.append(a_stream.cadence[index])
+            except TypeError:
+                a_cadence.append(0)
+            try:
+                a_heartrate.append(a_stream.heartrate[index])
+            except TypeError:
+                a_heartrate.append(0)
+
+            a_time.append(a_stream.time[index]/60)
+        time_per_mile = ([y - x for x, y in zip(a_time, a_time[1:])])
+        time_per_mile.insert(0, 0)
+        a_date = start_time(a_id)
+        META[a_id] = {"date": a_date, "mile_time": time_per_mile, "time": a_time,
+                      "heartrate": a_heartrate, "cadence": a_cadence, "altitude": a_altitude}
 
 
 FIG, AXS = plt.subplots(2, 2)
