@@ -10,6 +10,7 @@ pip3 install --user -r requirements.txt
 export STRAVA_SECRET=xxxxxxxx
 ```
 
-Sample plot
+Sample Run plot
 ![Sample Run Plot](https://raw.githubusercontent.com/ac427/strava/main/example.png)
+Sample Run plot
 ![Sample Ride Plot](https://raw.githubusercontent.com/ac427/strava/main/example_ride.png)
